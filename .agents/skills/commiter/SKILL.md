@@ -56,24 +56,26 @@ If ANSI color is supported, render:
 
 - header in cyan
 - divider in dim gray
+- `+` stat in green
+- `-` stat in red
 
 Use this format:
 
 ```text
 ---
 === Commit Plan Summary ===
-Total commits: `<N>`
-Total files: `<F>` | `+<A>` `-<D>`
+Total commits: <N>
+Total files: <F> | `+<A>` `-<D>`
 
 ---
 [1/N] <type>: <message>
-  - `<path1>` `+<added>` `-<deleted>`
-  - `<path2>` `+<added>` `-<deleted>`
-  - `<path3>` `+<added>` `-<deleted>`
+  - <path1> `+<added>` `-<deleted>`
+  - <path2> `+<added>` `-<deleted>`
+  - <path3> `+<added>` `-<deleted>`
 
 ---
 [2/N] <type>: <message>
-  - `<path4>` `+<added>` `-<deleted>`
+  - <path4> `+<added>` `-<deleted>`
 
 ---
 ```
