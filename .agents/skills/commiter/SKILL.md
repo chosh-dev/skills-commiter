@@ -28,7 +28,7 @@ scripts/get-recent-commits.sh 5
 
 ```bash
 scripts/apply-patch-cached.sh
-scripts/create-commit.sh "<message>"
+scripts/create-commit.sh [--fast] "<message>"
 ```
 
 4. Roll back staged state on abort/failure:
@@ -40,6 +40,7 @@ scripts/reset-cached.sh
 ## Interaction Contract
 
 - Keep execution one-pass: run analysis and plan generation first, then ask exactly one final confirmation to apply.
+- At final confirmation, ask apply mode together: `normal` (run hooks) or `fast` (--no-verify).
 - Avoid ping-pong status spam: do not list every command run as separate chat lines unless the user explicitly requests verbose logs.
 - Prefer read-only diff collection to avoid permission prompts in sandboxed environments.
 - `get-current-diff.sh` automatically prefers cached diff when staged changes exist, otherwise falls back to working diff.
@@ -95,5 +96,6 @@ If the user needs edits, ask for message changes in the same reply without extra
 - Execute end-to-end in one turn; avoid intermediate confirmation questions.
 - Preserve user intent; do not rewrite commit messages after confirmation.
 - Do not auto-commit without explicit user confirmation unless user requested non-interactive execution.
+- Use `scripts/create-commit.sh --fast "<message>"` only when user explicitly chose fast mode.
 - Keep output deterministic and auditable: plan first, apply second.
 - In plan output, preserve commit numbering as execution order and keep messages/order rationale consistent with that order.
