@@ -82,6 +82,13 @@ Total files: <F> | `+<A>` `-<D>`
 
 If the user needs edits, ask for message changes in the same reply without extra intermediate steps.
 
+## Commit Rules
+
+- One commit = one logical purpose (do not mix unrelated changes).
+- Order by dependency: prerequisite first, consumer later (no forward dependency).
+- Separate mechanical refactor from behavior change when possible.
+- Follow the message style from `scripts/get-recent-commits.sh 5`; keep wording clear and concise.
+
 ## Operating Rules
 
 - Route all shell execution through `scripts/*.sh`; do not type raw `git ...` in workflow steps.
@@ -89,3 +96,4 @@ If the user needs edits, ask for message changes in the same reply without extra
 - Preserve user intent; do not rewrite commit messages after confirmation.
 - Do not auto-commit without explicit user confirmation unless user requested non-interactive execution.
 - Keep output deterministic and auditable: plan first, apply second.
+- In plan output, preserve commit numbering as execution order and keep messages/order rationale consistent with that order.
