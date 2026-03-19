@@ -2,6 +2,7 @@
 set -euo pipefail
 
 git rev-parse --is-inside-work-tree >/dev/null 2>&1
+state_file="$(git rev-parse --git-path commiter-prev-index-tree)"
 
 if [[ $# -eq 0 ]]; then
   echo "commit message is required" >&2
@@ -31,3 +32,5 @@ if [[ "$fast_mode" -eq 1 ]]; then
 else
   git commit -m "$message"
 fi
+
+rm -f "$state_file"

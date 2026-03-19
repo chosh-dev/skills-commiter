@@ -19,7 +19,7 @@ The core contract is defined in `.agents/skills/commiter/SKILL.md`.
 - One-pass execution: analyze/plan first, then ask for a single final apply confirmation
 - Plan-first: always show a Commit Plan Summary before applying commits
 - Safe execution path: use only `scripts/*.sh` in the workflow
-- Rollback support: recover staged state via `reset-cached.sh` on failure/abort
+- Rollback support: restore pre-apply staged state via `reset-cached.sh` on failure/abort
 
 ## Using this skill in Codex
 
@@ -55,7 +55,7 @@ Use $commiter to split current git changes into semantic commits and apply them 
 cat planned.patch | .agents/skills/commiter/scripts/apply-patch-cached.sh
 .agents/skills/commiter/scripts/create-commit.sh "feat: split X and Y changes"
 
-# 4) On abort/failure, clean staged state
+# 4) On abort/failure, restore staged state from pre-apply snapshot
 .agents/skills/commiter/scripts/reset-cached.sh
 ```
 

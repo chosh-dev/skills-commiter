@@ -37,6 +37,8 @@ scripts/create-commit.sh [--fast] "<message>"
 scripts/reset-cached.sh
 ```
 
+`apply-patch-cached.sh` snapshots the current index first, and `reset-cached.sh` restores that snapshot.
+
 ## Interaction Contract
 
 - Keep execution one-pass: run analysis and plan generation first, then ask exactly one final confirmation to apply.
@@ -99,3 +101,4 @@ If the user needs edits, ask for message changes in the same reply without extra
 - Use `scripts/create-commit.sh --fast "<message>"` only when user explicitly chose fast mode.
 - Keep output deterministic and auditable: plan first, apply second.
 - In plan output, preserve commit numbering as execution order and keep messages/order rationale consistent with that order.
+- On abort/failure, use `scripts/reset-cached.sh` to restore the pre-apply staged state (do not use raw `git reset`).
