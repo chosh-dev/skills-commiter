@@ -43,7 +43,7 @@ scripts/reset-cached.sh
 - At final confirmation, ask apply mode together: `normal` (run hooks) or `fast` (--no-verify).
 - Avoid ping-pong status spam: do not list every command run as separate chat lines unless the user explicitly requests verbose logs.
 - Prefer read-only diff collection to avoid permission prompts in sandboxed environments.
-- `get-current-diff.sh` automatically prefers cached diff when staged changes exist, otherwise falls back to working diff.
+- `get-current-diff.sh` uses cached diff only when staged changes exist (ignores unstaged/untracked), otherwise falls back to working diff.
 - Untracked files are not included in working diff; stage them first to include.
 
 ## Commit Plan Output Format
