@@ -12,15 +12,16 @@ Ask only once at final apply confirmation unless a hard blocker appears.
 
 ## Workflow
 
-1. Collect diff context:
+1. Collect context in one command:
+
+```bash
+scripts/collect-context.sh 5
+```
+
+2. (Optional fallback) Run separately only when debugging:
 
 ```bash
 scripts/get-current-diff.sh
-```
-
-2. Read style anchors:
-
-```bash
 scripts/get-recent-commits.sh 5
 ```
 
@@ -43,6 +44,8 @@ scripts/reset-cached.sh
 
 - Keep execution one-pass: run analysis and plan generation first, then ask exactly one final confirmation to apply.
 - At final confirmation, ask apply mode together: `normal` (run hooks) or `fast` (--no-verify).
+- Start execution first, then report results. Do not send "I will do X" intent narration before read-only collection commands.
+- Keep pre-plan chat minimal: at most one short status line, and only if command execution is noticeably slow.
 - Avoid ping-pong status spam: do not list every command run as separate chat lines unless the user explicitly requests verbose logs.
 - Prefer read-only diff collection to avoid permission prompts in sandboxed environments.
 - `get-current-diff.sh` uses cached diff only when staged changes exist (ignores unstaged/untracked), otherwise falls back to working diff.

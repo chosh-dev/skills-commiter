@@ -44,11 +44,12 @@ Use $commiter to split current git changes into semantic commits and apply them 
 ## Typical execution flow
 
 ```bash
-# 1) Inspect and collect current changes
+# 1) Collect diff + style anchors in one shot
+.agents/skills/commiter/scripts/collect-context.sh 5
+
+# (Optional) Debug each collector separately
 .agents/skills/commiter/scripts/get-current-diff.sh --mode
 .agents/skills/commiter/scripts/get-current-diff.sh
-
-# 2) Collect style anchors from recent commits
 .agents/skills/commiter/scripts/get-recent-commits.sh 5
 
 # 3) After plan confirmation, apply patch and create commit
