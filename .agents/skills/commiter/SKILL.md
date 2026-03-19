@@ -15,12 +15,9 @@ Execute in one pass. Ask only one final apply confirmation unless a hard blocker
 scripts/collect-context.sh 5
 ```
 
-Fallback for debugging only:
-
-```bash
-scripts/get-current-diff.sh
-scripts/get-recent-commits.sh 5
-```
+- This single command prints both sections required for planning:
+- `CONTEXT:DIFF`: hunk-level code diff (prefers cached diff; otherwise uses working tracked diff).
+- `CONTEXT:RECENT_COMMITS`: the most recent 5 commits (format: `hash<US>subject<RS>`).
 
 2. Build semantic commit units.
 
