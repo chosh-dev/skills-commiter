@@ -39,9 +39,21 @@ scripts/collect-context.sh 5
 
 ### 5. Apply with wrappers only
 
+- Build the full apply command sequence for all planned commits and execute it in one continuous run.
+- Do not pause between commits for extra prompts or re-planning unless an apply/commit command fails.
+
 ```bash
-scripts/apply-patch-cached.sh
-scripts/create-commit.sh [--fast] "<message>"
+# Execute as one contiguous block after apply confirmation.
+# Repeat in order: [1/N] ... [N/N]
+cat <<'PATCH_1' | scripts/apply-patch-cached.sh
+<patch for commit 1>
+PATCH_1
+scripts/create-commit.sh [--fast] "<message 1>"
+
+cat <<'PATCH_2' | scripts/apply-patch-cached.sh
+<patch for commit 2>
+PATCH_2
+scripts/create-commit.sh [--fast] "<message 2>"
 ```
 
 ### 6. Recover on abort/failure
