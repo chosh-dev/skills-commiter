@@ -1,4 +1,4 @@
 interface:
   display_name: "Commiter"
   short_description: "Plan semantic commits from mixed git diffs"
-  default_prompt: "Use $commiter to split current git changes into semantic commits and apply them safely. Execute analysis first with minimal chatter, then show only the commit plan and one final apply confirmation (normal/fast)."
+  default_prompt: "Use $commiter to split current git changes into semantic commits and apply them safely. Keep chat minimal: show the plan, ask once for normal/fast, then execute immediately with no extra intent narration or post-apply verification chatter unless requested."
