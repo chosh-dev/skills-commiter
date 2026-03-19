@@ -22,7 +22,7 @@ mode() {
     return
   fi
 
-  if has_working_tracked_diff; then
+  if has_working_tracked_diff || has_untracked_files; then
     echo "working"
     return
   fi
@@ -46,16 +46,14 @@ if [[ "$current_mode" == "cached" ]]; then
 fi
 
 if [[ "$current_mode" == "none" ]]; then
-  if has_untracked_files; then
-    echo "only untracked files found; stage them to include." >&2
-    exit 3
-  fi
   echo "No changes (diff) found." >&2
   exit 3
 fi
 
-if has_untracked_files; then
-  echo "untracked files are not included in working diff; stage them to include." >&2
-fi
-
 git diff --no-color --unified=3
+
+if has_untracked_files; then
+  git ls-files --others --exclude-standard | while IFS= read -r file; do
+    git diff --no-index /dev/null "$file" --no-color --unified=3 || true
+  done
+fi

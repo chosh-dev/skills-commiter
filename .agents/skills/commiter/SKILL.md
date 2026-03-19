@@ -82,8 +82,7 @@ scripts/reset-cached.sh
 ## Diff Selection
 
 - If staged changes exist, use cached diff only and ignore unstaged/untracked for planning.
-- If staged changes do not exist, use working tracked diff.
-- Exclude untracked files from working diff until they are staged.
+- If staged changes do not exist, use working tracked diff and untracked files.
 
 ## Chat Rules
 
