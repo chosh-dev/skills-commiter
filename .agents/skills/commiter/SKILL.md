@@ -11,13 +11,15 @@ Execute in one pass. Ask only one final apply confirmation unless a hard blocker
 
 ### 1. Collect context.
 
+- Run the two collectors.
+
 ```bash
-scripts/collect-context.sh 5
+scripts/get-current-diff.sh > /tmp/commiter.diff &
+scripts/get-recent-commits.sh 5 > /tmp/commiter.recent
 ```
 
-- This single command prints both sections required for planning:
-- `CONTEXT:DIFF`: hunk-level code diff (prefers cached diff; otherwise uses working tracked diff).
-- `CONTEXT:RECENT_COMMITS`: the most recent 5 commits (format: `hash<US>subject<RS>`).
+- `scripts/get-current-diff.sh`: full patch text for all hunks in scope (prefers cached diff; otherwise uses working tracked diff).
+- `scripts/get-recent-commits.sh 5`: the most recent 5 commits (format: `hash<US>subject<RS>`).
 
 ### 2. Build semantic commit units
 
