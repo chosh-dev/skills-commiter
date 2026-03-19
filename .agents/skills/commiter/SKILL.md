@@ -9,7 +9,7 @@ Execute in one pass. Ask only one final apply confirmation unless a hard blocker
 
 ## Default Runbook
 
-1. Collect context.
+### 1. Collect context.
 
 ```bash
 scripts/collect-context.sh 5
@@ -19,32 +19,32 @@ scripts/collect-context.sh 5
 - `CONTEXT:DIFF`: hunk-level code diff (prefers cached diff; otherwise uses working tracked diff).
 - `CONTEXT:RECENT_COMMITS`: the most recent 5 commits (format: `hash<US>subject<RS>`).
 
-2. Build semantic commit units.
+### 2. Build semantic commit units
 
 - Keep one logical purpose per commit.
 - Order commits by dependency (prerequisite first).
 - Separate mechanical refactor from behavior change when possible.
 - Follow recent commit style from `scripts/get-recent-commits.sh 5`.
 
-3. Present the plan.
+### 3. Present the plan
 
 - Print Commit Plan Summary before any apply action.
 - If edits are needed, request message changes in the same reply.
 
-4. Ask once for apply mode.
+### 4. Ask once for apply mode
 
 - `cancel`: abort without applying
 - `normal`: run hooks
 - `fast`: skip git hooks (use '--no-verify' in git commit)
 
-5. Apply with wrappers only.
+### 5. Apply with wrappers only
 
 ```bash
 scripts/apply-patch-cached.sh
 scripts/create-commit.sh [--fast] "<message>"
 ```
 
-6. Recover on abort/failure.
+### 6. Recover on abort/failure
 
 ```bash
 scripts/reset-cached.sh
