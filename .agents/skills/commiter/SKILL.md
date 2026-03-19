@@ -23,18 +23,22 @@ scripts/get-recent-commits.sh 5
 ```
 
 2. Build semantic commit units.
+
 - Keep one logical purpose per commit.
 - Order commits by dependency (prerequisite first).
 - Separate mechanical refactor from behavior change when possible.
 - Follow recent commit style from `scripts/get-recent-commits.sh 5`.
 
 3. Present the plan.
+
 - Print Commit Plan Summary before any apply action.
 - If edits are needed, request message changes in the same reply.
 
 4. Ask once for apply mode.
+
+- `cancel`: abort without applying
 - `normal`: run hooks
-- `fast`: `--no-verify`
+- `fast`: skip git hooks (use '--no-verify' in git commit)
 
 5. Apply with wrappers only.
 
@@ -58,6 +62,7 @@ scripts/reset-cached.sh
 - Preserve user-confirmed messages and ordering.
 - Do not auto-commit without explicit user confirmation unless user requested non-interactive execution.
 - Use `--fast` only when user explicitly chose `fast`.
+- If user chose `cancel`, stop without applying patches or commits.
 - After apply mode confirmation, run only commands required to apply commits.
 - Do not run `scripts/get-recent-commits.sh` or `scripts/get-current-diff.sh --mode` after apply unless requested or needed for failure diagnosis.
 - Keep output deterministic and auditable: plan first, apply second.
@@ -75,6 +80,7 @@ scripts/reset-cached.sh
 - Do not narrate intent before read-only collection commands.
 - Keep pre-plan chat to at most one short status line, only when execution is noticeably slow.
 - After user selects `normal` or `fast`, execute immediately without preface text.
+- If user selects `cancel`, end the flow without extra processing.
 - Do not announce follow-up checks (for example recent commits or diff mode) unless user explicitly asked for verification logs.
 - Avoid command-by-command chat logs unless user asked for verbose output.
 
