@@ -17,6 +17,7 @@ This repo separates the original `commiter` workflow into its own codebase to ac
 The core contract is defined in `.agents/skills/commiter/SKILL.md`.
 
 - One-pass execution: analyze/plan first, then ask for a single final apply confirmation
+- Hunk-level precision: split mixed changes into fine-grained commit units when needed
 - Plan-first: always show a Commit Plan Summary before applying commits
 - Safe execution path: use only `scripts/*.sh` in the workflow
 - Rollback support: restore pre-apply staged state via `reset-cached.sh` on failure/abort
@@ -34,6 +35,38 @@ Example prompt:
 ```text
 Use $commiter to split current git changes into semantic commits and apply them safely.
 ```
+
+## Install with skills CLI
+
+You can install directly from GitHub:
+
+```bash
+npx -y skills add chosh-dev/skills-commiter --skill commiter
+```
+
+You can also validate this repository locally before publishing:
+
+```bash
+npx -y skills add . --list
+```
+
+## Publish to skills.sh
+
+`skills.sh` does not use a manual upload form. A skill is indexed from public GitHub repositories through `skills add` installs.
+
+Checklist:
+
+1. Keep this repository public on GitHub.
+2. Ensure `.agents/skills/commiter/SKILL.md` remains in place.
+3. Run at least one GitHub-source install command:
+
+```bash
+npx -y skills add chosh-dev/skills-commiter --skill commiter
+```
+
+4. Wait for indexing and then check `https://skills.sh/`.
+
+Note: if telemetry is disabled (`DISABLE_TELEMETRY=1`), installation ranking/index aggregation may not be recorded.
 
 ## Development notes
 

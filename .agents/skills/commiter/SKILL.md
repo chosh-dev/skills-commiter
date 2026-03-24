@@ -1,6 +1,6 @@
 ---
 name: commiter
-description: Create and execute semantic git commit plans from staged or unstaged diffs via `scripts/*.sh` wrappers. Use when Codex should split a mixed diff into scoped commits, validate hunk coverage, show a commit summary, and apply commits safely with a single confirmation.
+description: Create precise hunk-level semantic commits from staged or unstaged diffs, then execute the full plan in one pass with a single final apply confirmation (minimal ping-pong) via `scripts/*.sh` wrappers.
 ---
 
 # Commiter
