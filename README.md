@@ -50,24 +50,6 @@ You can also validate this repository locally before publishing:
 npx -y skills add . --list
 ```
 
-## Publish to skills.sh
-
-`skills.sh` does not use a manual upload form. A skill is indexed from public GitHub repositories through `skills add` installs.
-
-Checklist:
-
-1. Keep this repository public on GitHub.
-2. Ensure `.agents/skills/commiter/SKILL.md` remains in place.
-3. Run at least one GitHub-source install command:
-
-```bash
-npx -y skills add chosh-dev/skills-commiter --skill commiter
-```
-
-4. Wait for indexing and then check `https://skills.sh/`.
-
-Note: if telemetry is disabled (`DISABLE_TELEMETRY=1`), installation ranking/index aggregation may not be recorded.
-
 ## Development notes
 
 - Scripts run only inside a Git worktree.
