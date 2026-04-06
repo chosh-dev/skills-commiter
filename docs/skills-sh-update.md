@@ -1,6 +1,6 @@
 # skills.sh에 내 skill 업데이트하기
 
-이 문서는 `chosh-dev/skills-commiter` 기준으로 작성되었습니다.
+이 문서는 `chosh-dev/skills` 기준으로 작성되었습니다.
 
 ## 어떤 파일을 수정해야 하나
 
@@ -35,13 +35,20 @@ git push origin main
 4. 인덱싱 재트리거
 
 ```bash
-npx -y skills add chosh-dev/skills-commiter --skill commiter --yes
+npx -y skills add chosh-dev/skills --skill commiter --yes
 ```
 
 또는:
 
 ```bash
-npx -y skills add chosh-dev/skills-commiter@commiter --yes
+npx -y skills add chosh-dev/skills@commiter --yes
+```
+
+여러 스킬 운영 시:
+
+```bash
+npx -y skills add chosh-dev/skills --skill commiter --yes
+npx -y skills add chosh-dev/skills --skill <another-skill> --yes
 ```
 
 ## 반영 확인
@@ -53,7 +60,7 @@ npx -y skills find commiter
 브라우저 확인:
 
 ```text
-https://skills.sh/chosh-dev/skills-commiter/commiter
+https://skills.sh/chosh-dev/skills/commiter
 ```
 
 ## 트러블슈팅
@@ -63,4 +70,3 @@ https://skills.sh/chosh-dev/skills-commiter/commiter
   - 다른 환경/사용자에서 `skills add`를 한 번 더 실행해 설치 신호 추가
 - 저장소가 Private 이면 집계/노출 대상에서 제외될 수 있음
 - `SKILL.md` 경로/형식이 깨지면 파싱 실패 가능
-

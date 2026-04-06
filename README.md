@@ -1,15 +1,15 @@
-# skills-commiter
+# skills
 
-This repository packages `commiter` as a dedicated Codex Agent Skill.
-It focuses on making the semantic commit-splitting workflow reusable as a standalone skill package.
+This repository is a Codex Agent Skill monorepo.
+It currently includes `commiter`, and is structured to manage multiple skills in one place.
 Original `commiter` repository: [chosh-dev/commiter](https://github.com/chosh-dev/commiter)
 
 ## Why this repo exists
 
-This repo separates the original `commiter` workflow into its own codebase to achieve:
+This repo packages reusable skills to achieve:
 
-- Reusability: use the same commit planning/apply flow across multiple projects
-- Maintainability: version the skill contract (`SKILL.md`) and runner scripts independently
+- Reusability: keep operational workflows as installable skills
+- Maintainability: version each skill contract (`SKILL.md`) and runner scripts independently
 - Safety: force wrapper-script execution instead of composing raw `git` commands in LLM prompts
 
 ## Skill contract summary
@@ -22,13 +22,13 @@ The core contract is defined in `.agents/skills/commiter/SKILL.md`.
 - Safe execution path: use only `scripts/*.sh` in the workflow
 - Rollback support: restore pre-apply staged state via `reset-cached.sh` on failure/abort
 
-## Using this skill in Codex
+## Using skills in Codex
 
-For Codex to detect this skill, the skill directory must be available in Codex's skill path.
+For Codex to detect a skill, the skill directory must be available in Codex's skill path.
 
 1. Clone this repository.
-2. Place (or symlink) `.agents/skills/commiter` into your Codex skills directory.
-3. Invoke `$commiter` in a Codex prompt to run the commit split/apply workflow.
+2. Place (or symlink) `.agents/skills/<skill-name>` into your Codex skills directory.
+3. Invoke `$<skill-name>` in a Codex prompt.
 
 Example prompt:
 
@@ -41,14 +41,43 @@ Use $commiter to split current git changes into semantic commits and apply them 
 You can install directly from GitHub:
 
 ```bash
-npx -y skills add chosh-dev/skills-commiter --skill commiter
+npx -y skills add chosh-dev/skills --skill commiter
 ```
 
-You can also validate this repository locally before publishing:
+If the repo has multiple skills, add each one explicitly:
+
+```bash
+npx -y skills add chosh-dev/skills --skill commiter
+npx -y skills add chosh-dev/skills --skill <another-skill>
+```
+
+You can also use `<repo>@<skill-name>` form:
+
+```bash
+npx -y skills add chosh-dev/skills@commiter
+```
+
+Validate this repository locally before publishing:
 
 ```bash
 npx -y skills add . --list
 ```
+
+## Add more skills to this repo
+
+Register additional skills under `.agents/skills`:
+
+```text
+.agents/skills/
+  commiter/
+    SKILL.md
+    scripts/*
+  <another-skill>/
+    SKILL.md
+    scripts/*
+```
+
+Each skill is independently installable with `npx -y skills add <owner>/<repo> --skill <skill-name>`.
 
 ## Development notes
 

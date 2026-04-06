@@ -1,6 +1,6 @@
 # skills.sh에 내 skill 새로 등록하기
 
-이 문서는 `chosh-dev/skills-commiter` 기준으로 작성되었습니다.
+이 문서는 `chosh-dev/skills` 기준으로 작성되었습니다.
 
 ## 전제 조건
 
@@ -25,13 +25,20 @@ git push origin main
 3. `skills` CLI로 GitHub 소스 설치(인덱싱 트리거)
 
 ```bash
-npx -y skills add chosh-dev/skills-commiter --skill commiter --yes
+npx -y skills add chosh-dev/skills --skill commiter --yes
 ```
 
 권장 대체 형식:
 
 ```bash
-npx -y skills add chosh-dev/skills-commiter@commiter --yes
+npx -y skills add chosh-dev/skills@commiter --yes
+```
+
+여러 스킬 운영 예시:
+
+```bash
+npx -y skills add chosh-dev/skills --skill commiter --yes
+npx -y skills add chosh-dev/skills --skill <another-skill> --yes
 ```
 
 ## 등록 확인
@@ -47,7 +54,7 @@ npx -y skills find chosh-dev
 
 ```text
 https://skills.sh/<owner>/<repo>/<skill-name>
-예: https://skills.sh/chosh-dev/skills-commiter/commiter
+예: https://skills.sh/chosh-dev/skills/commiter
 ```
 
 ## 주의 사항
@@ -55,4 +62,3 @@ https://skills.sh/<owner>/<repo>/<skill-name>
 - `skills.sh`는 수동 업로드 폼이 아니라 `skills add` 설치 텔레메트리 기반 자동 집계입니다.
 - 반영에 시간이 걸릴 수 있습니다. (즉시 404가 나올 수 있음)
 - 텔레메트리 비활성화(`DISABLE_TELEMETRY=1`) 환경에서는 집계가 누락될 수 있습니다.
-
