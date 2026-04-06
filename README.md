@@ -1,7 +1,7 @@
 # skills
 
 This repository is a Codex Agent Skill monorepo.
-It currently includes `commiter`, and is structured to manage multiple skills in one place.
+It currently includes `commiter` and `pr-compose`, and is structured to manage multiple skills in one place.
 Original `commiter` repository: [chosh-dev/commiter](https://github.com/chosh-dev/commiter)
 
 ## Why this repo exists
@@ -14,13 +14,19 @@ This repo packages reusable skills to achieve:
 
 ## Skill contract summary
 
-The core contract is defined in `.agents/skills/commiter/SKILL.md`.
+Core contracts are defined per skill:
 
-- One-pass execution: analyze/plan first, then ask for a single final apply confirmation
-- Hunk-level precision: split mixed changes into fine-grained commit units when needed
-- Plan-first: always show a Commit Plan Summary before applying commits
-- Safe execution path: use only `scripts/*.sh` in the workflow
-- Rollback support: restore pre-apply staged state via `reset-cached.sh` on failure/abort
+- `.agents/skills/commiter/SKILL.md`
+  - One-pass execution: analyze/plan first, then ask for a single final apply confirmation
+  - Hunk-level precision: split mixed changes into fine-grained commit units when needed
+  - Plan-first: always show a Commit Plan Summary before applying commits
+  - Safe execution path: use only `scripts/*.sh` in the workflow
+  - Rollback support: restore pre-apply staged state via `reset-cached.sh` on failure/abort
+- `.agents/skills/pr-compose/SKILL.md`
+  - PR compose package flow optimized for concise review
+  - GitHub host-aware compose link generation from `origin`
+  - Title format enforced as English conventional prefix (`feat:`, `refactor:`, `chore:`)
+  - Body format fixed to `Summary`, `Description`, `Related`
 
 ## Using skills in Codex
 
@@ -36,6 +42,10 @@ Example prompt:
 Use $commiter to split current git changes into semantic commits and apply them safely.
 ```
 
+```text
+Use $pr-compose to generate a GitHub PR compose link, title, and body from current branch changes.
+```
+
 ## Install with skills CLI
 
 You can install directly from GitHub:
@@ -48,13 +58,14 @@ If the repo has multiple skills, add each one explicitly:
 
 ```bash
 npx -y skills add chosh-dev/skills --skill commiter
-npx -y skills add chosh-dev/skills --skill <another-skill>
+npx -y skills add chosh-dev/skills --skill pr-compose
 ```
 
 You can also use `<repo>@<skill-name>` form:
 
 ```bash
 npx -y skills add chosh-dev/skills@commiter
+npx -y skills add chosh-dev/skills@pr-compose
 ```
 
 Validate this repository locally before publishing:
@@ -72,7 +83,7 @@ Register additional skills under `.agents/skills`:
   commiter/
     SKILL.md
     scripts/*
-  <another-skill>/
+  pr-compose/
     SKILL.md
     scripts/*
 ```

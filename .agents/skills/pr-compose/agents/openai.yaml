@@ -1,0 +1,4 @@
+interface:
+  display_name: "PR Compose"
+  short_description: "Generate PR compose link, title, and body"
+  default_prompt: "Use $pr-compose to generate a GitHub PR compose package from the current conversation thread: a host-aware creation link, an English conventional title (feat/refactor/chore), and a concise body in the thread language using Summary, Description, and Related. Treat thread-agreed final outcomes as the source of truth, avoid terminal-log narration, and include as-is/to-be tables only when they clearly improve reviewer understanding."
